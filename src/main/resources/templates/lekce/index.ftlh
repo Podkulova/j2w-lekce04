@@ -8,7 +8,7 @@
 
 <div class="container">
     [#include '/_common/header.ftlh']
-
+[#list seznamLekci]
     <table class="table">
         <thead>
         <tr>
@@ -20,15 +20,18 @@
         </tr>
         </thead>
         <tbody>
+        [#items  as lekce]
         <tr>
-            <td>1.</td>
-            <td>Lekce 1</td>
-            <td>19. září 2022</td>
-            <td>18:00–20:30</td>
-            <td>V mechu</td>
+            <td>${lekce?counter}</td>
+            <td>${lekce.nazev}</td>
+            <td>${lekce.datum?date}</td>
+            <td>${lekce.casOd?time} : ${lekce.casDo?time}</td>
+            <td>${lekce.misto}</td>
         </tr>
         </tbody>
+        [/#items]
     </table>
+[/#list]
 </div>
 </body>
 </html>

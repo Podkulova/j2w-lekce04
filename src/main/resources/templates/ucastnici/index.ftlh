@@ -8,7 +8,7 @@
 
 <div class="container">
     [#include '/_common/header.ftlh']
-
+    [#list seznamUcatniku]
     <table class="table table-striped">
         <thead>
         <tr>
@@ -21,24 +21,26 @@
         </tr>
         </thead>
         <tbody>
+        [#items as ucastnik]
         <tr>
-            <td>1</td>
-            <td><i class="las la-mars" style="color: blue;"></i></td>
-            <td>Medvídek</td>
-            <td>Pú</td>
-            <td>Stokorcový les</td>
-            <td><a href="/ucastnici/detail/1" class="btn btn-primary">Detail</a></td>
+            <td>${ucastnik?counter}</td>
+            <td>
+                [#if ucastnik.gender = "žena"]
+                <i class="las la-venus" style="color: red"></i></td>
+                [#else ]
+                <i class="las la-mars" style="color: blue;"></i></td>
+            [/#if]
+            <td>${ucastnik.jmeno}</td>
+            <td>${ucastnik.prijmeni}</td>
+            <td>[#if ucastnik.bydliste??]${ucastnik.bydliste}[#else]<em>neuvedeno</em>[/#if]</td>
+            <td><a href="/ucastnici/detail/${ucastnik?index}" class="btn btn-primary">Detail</a></td>
         </tr>
-        <tr>
-            <td>2</td>
-            <td><i class="las la-venus" style="color: red;"></i></td>
-            <td>Čarodějnice</td>
-            <td>Malá</td>
-            <td><em>neuvedeno</em></td>
-            <td><a href="/ucastnici/detail/2" class="btn btn-primary">Detail</a></td>
-        </tr>
+        [/#items]
         </tbody>
     </table>
+    [#else]
+    <div><em>Seznam účastníků je prázdný.</em></div>
+    [/#list]
 </div>
 </body>
 </html>
